@@ -6,7 +6,7 @@ import {useUtilityStore} from "./UtilityStore";
 export const useProductStore = defineStore('products', {
   state: () => ({
     generic: useGenericStore(),
-    utilityStore: useUtilityStore(),
+    utility: useUtilityStore(),
     products: ref([]),
     product_group_list: ref([]),
     currentProduct: ref({}),

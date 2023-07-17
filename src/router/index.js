@@ -7,12 +7,14 @@ import StaffUserView from "@/views/StaffUserView.vue";
 import ProductTagsView from "@/views/ProductTagsView.vue";
 import CurrentOrderView from "@/views/CurrentOrderView.vue";
 import Settings from "@/views/Settings.vue";
+import ManageProduct from "@/components/Products/ManageProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', name: 'Bridge', component: Bridge },
     { path: '/products', name: 'Products', component: ProductsView },
+    { path: '/manage-products', name: 'Products - Manage', component: ManageProduct },
     { path: '/orders', name: 'Orders', component: OrdersView },
     { path: '/staff-user', name: 'Staff Users', component: StaffUserView },
     { path: '/product-tags', name: 'Product Tags', component: ProductTagsView },

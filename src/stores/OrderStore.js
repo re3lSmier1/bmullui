@@ -170,6 +170,7 @@ export const useOrderStore = defineStore('orders', {
       return this.generic.SendPostRequest("Order/DeleteLineItem", {Id: id})
         .then(response => {
           this.OrderDetails()
+          this.utility.CallNotifier("Line Item successfully deleted")
         }).catch(err =>{
           this.utility.CallNotifier(err)
         })

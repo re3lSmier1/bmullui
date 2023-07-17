@@ -7,10 +7,15 @@ import {storeToRefs} from "pinia";
 import {useProductStore} from "@/stores/ProductStore";
 import LineItem from "@/components/CurrentOrder/LineItem.vue";
 import AddLineItemModal from "@/components/CurrentOrder/AddLineItemModal.vue";
+import SaveOrderModal from "@/components/CurrentOrder/SaveOrderModal.vue";
 const productStore = useProductStore()
 const orderStore = useOrderStore()
 const orderId = ref(null)
 const { orderStatus, orderNumber } = storeToRefs(useOrderStore())
+
+async function MoveToCashier(){
+  orderStore.PushToCashier()
+}
 
 onMounted(()=> {
   orderId.value = localStorage.getItem("OrderId")
@@ -50,10 +55,10 @@ onMounted(()=> {
     <div class="mt-3">
       <div class="d-flex flex-wrap">
         <AddLineItemModal />
-        <v-btn class="mr-3 mb-2" color="amber">Clear</v-btn>
-        <v-btn class="mr-3 mb-2" color="success">Save</v-btn>
-        <v-btn class="mr-3 mb-2" color="red">Discard</v-btn>
-        <v-btn class="mr-3 mb-2" color="black">Checkout</v-btn>
+        <v-btn class="mr-3 mb-2" color="amber"   @click="orderStore.ClearOrder()">Clear</v-btn>
+        <SaveOrderModal :OrderId="orderStore.newOrder?.orderNumber" />
+        <v-btn class="mr-3 mb-2" color="red"  @click="orderStore.DeleteOrder()">Discard</v-btn>
+        <v-btn class="mr-3 mb-2" color="black" @click="MoveToCashier()">Checkout</v-btn>
       </div>
     </div>
   </div>

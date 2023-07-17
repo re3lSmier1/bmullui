@@ -1,6 +1,10 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiCartPlus, mdiChevronRight} from "@mdi/js";
+import {useOrderStore} from "@/stores/OrderStore";
+import {useUtilityStore} from "@/stores/UtilityStore";
+const orderStore = useOrderStore()
+const utilityStore = useUtilityStore()
 
 const props = defineProps({
   product: {
@@ -8,22 +12,35 @@ const props = defineProps({
     required: true
   }
 })
+
+async function PushToOrder(item) {
+  await orderStore.CreateItem(item)
+      .then(response => {
+        // console.log(response.data)
+        orderStore.OrderDetails()
+        utilityStore.CallNotifier("Item successfully added to current order")
+        // dialog.value = false
+        // localStorage.setItem("OrderId", response.data?.id)
+      }).catch(err =>{
+        utilityStore.CallNotifier(err)
+      })
+}
 </script>
 
 <template>
   <div>
     <v-card density="compact">
-      <v-card-text style="padding: 7px">
+      <v-card-text style="padding: 7px 15px ">
         <div class="d-flex justify-space-between mt-2">
           <div>
             <!--              {{ product }}-->
             <div>{{ product.name }} - {{  product.sku }}</div>
-            <!--                <div>&#45;&#45; Product Description &#45;&#45;</div>-->
+<!--            <div>{{ product.priceDisplay }}</div>-->
           </div>
           <div>
-            <v-btn icon color="success" size="small" >
+            <v-btn icon color="success" size="x-small" @click="PushToOrder(product)">
               <div style="padding: 5px">
-                <svg-icon size="20" type="mdi" :path="mdiCartPlus"></svg-icon>
+                <svg-icon size="15" type="mdi" :path="mdiCartPlus"></svg-icon>
               </div>
             </v-btn>
 

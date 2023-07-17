@@ -19,7 +19,7 @@
 
 <script setup>
 import {ref} from "vue";
-import {useUtilityStore} from "@/store/UtilityStore";
+import {useUtilityStore} from "@/stores/UtilityStore";
 const utilityStore = useUtilityStore()
 const snackbar = ref(false)
 const props = defineProps({

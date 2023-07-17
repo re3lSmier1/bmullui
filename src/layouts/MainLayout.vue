@@ -6,6 +6,7 @@
   import {useOrderStore} from "@/stores/OrderStore";
   import {useUtilityStore} from "@/stores/UtilityStore";
   import {useProductTagStore} from "@/stores/ProductTagStore";
+  import Notifier from "@/components/Notifier.vue";
   const userStore = useUserStore()
   const productStore = useProductStore()
   const orderStore = useOrderStore()
@@ -44,6 +45,7 @@
   <v-layout>
     <v-main style="background-color: #F5F5F5; min-height: 100vh">
       <RouterView />
+      <Notifier />
     </v-main>
   </v-layout>
 

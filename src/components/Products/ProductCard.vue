@@ -12,7 +12,7 @@ const props = defineProps({
 
 <template>
   <div>
-    <router-link to="/" style="text-decoration: none">
+    <router-link :to="`/manage-products?ProductId=${product.id}`" style="text-decoration: none">
       <v-card density="compact">
         <v-card-text style="padding: 7px">
           <div class="d-flex justify-space-between mt-2">
