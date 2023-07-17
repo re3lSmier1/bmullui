@@ -2,6 +2,7 @@
 
 import ProductTagsTable from "@/components/ProductTags/ProductTagsTable.vue";
 import BackAppBar from "@/components/BackAppBar.vue";
+
 </script>
 
 <template>

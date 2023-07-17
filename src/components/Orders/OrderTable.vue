@@ -1,19 +1,25 @@
 <script setup>
 
 import { VDataTable } from 'vuetify/labs/VDataTable'
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {useOrderStore} from "@/stores/OrderStore";
 
-const itemsPerPage = ref(5)
+const orderStore = useOrderStore()
+onMounted(() =>{
+  orderStore.All()
+})
+
+const itemsPerPage = ref(25)
 const headers = ref([
   {
     title: 'Name',
     align: 'start',
     sortable: false,
-    key: 'name',
+    key: 'orderName',
   },
-  { title: 'Order No.', align: 'end', key: 'calories' },
-  { title: 'Price', align: 'end', key: 'fat' },
-  { title: 'Status', align: 'end', key: 'carbs' },
+  { title: 'Order No.', align: 'end', key: 'orderNumber' },
+  { title: 'Price', align: 'end', key: 'totalPriceDisplay' },
+  { title: 'Status', align: 'end', key: 'statusDisplay' },
   { title: 'Options', align: 'end', key: 'protein' },
   //{ title: 'Iron (%)', align: 'end', key: 'iron' },
 ])
@@ -43,14 +49,21 @@ const desserts = ref([
     <v-data-table
         v-model:items-per-page="itemsPerPage"
         :headers="headers"
-        :items="desserts"
-        item-value="name"
+        :items="orderStore.orders"
+        item-value="id"
         class="elevation-1 pa-5"
     >
       <template v-slot:item.calories="{ item }">
         <v-chip color="primary">
           {{ item.columns.calories }}
         </v-chip>
+      </template>
+      <template v-slot:item.protein="{item}">
+        <div class="text-center">
+          <v-btn color="primary" size="small">
+            View
+          </v-btn>
+        </div>
       </template>
     </v-data-table>
   </div>

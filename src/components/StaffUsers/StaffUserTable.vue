@@ -1,8 +1,16 @@
 <script setup>
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import {ref} from "vue";
+import {useUserStore} from "@/stores/UserStore";
+import {onMounted} from "vue";
+const userStore = useUserStore()
 
-const itemsPerPage = ref(5)
+onMounted(() => {
+  userStore.Get();
+})
+
+
+const itemsPerPage = ref(25)
 const headers = ref([
   {
     title: 'Name',
@@ -10,9 +18,9 @@ const headers = ref([
     sortable: false,
     key: 'name',
   },
-  { title: 'Email', align: 'end', key: 'calories' },
-  { title: 'TRN', align: 'end', key: 'fat' },
-  { title: 'Options', align: 'end', key: 'protein' },
+  { title: 'Email', align: 'end', key: 'emailAddress' },
+  { title: 'TRN', align: 'end', key: 'trn' },
+  { title: 'Options', align: 'end', key: 'option' },
   //{ title: 'Iron (%)', align: 'end', key: 'iron' },
 ])
 const desserts = ref([
@@ -40,14 +48,12 @@ const desserts = ref([
     <v-data-table
         v-model:items-per-page="itemsPerPage"
         :headers="headers"
-        :items="desserts"
+        :items="userStore.users"
         item-value="name"
         class="elevation-1 pa-5"
     >
-      <template v-slot:item.fat="{ item }">
-        <v-chip color="primary">
-          {{ item.columns.fat }}
-        </v-chip>
+      <template v-slot:item.option="{ item }">
+        <v-btn size="small" color="primary">View</v-btn>
       </template>
     </v-data-table>
   </div>

@@ -6,6 +6,7 @@ import OrdersView from "@/views/OrdersView.vue";
 import StaffUserView from "@/views/StaffUserView.vue";
 import ProductTagsView from "@/views/ProductTagsView.vue";
 import CurrentOrderView from "@/views/CurrentOrderView.vue";
+import Settings from "@/views/Settings.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,7 @@ const router = createRouter({
     { path: '/staff-user', name: 'Staff Users', component: StaffUserView },
     { path: '/product-tags', name: 'Product Tags', component: ProductTagsView },
     { path: '/current-order', name: 'Current Order', component: CurrentOrderView },
+    { path: '/settings', name: 'Settings', component: Settings },
     /*{
       path: '/about',
       name: 'about',

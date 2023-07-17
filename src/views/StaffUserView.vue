@@ -2,6 +2,7 @@
 
 import BackAppBar from "@/components/BackAppBar.vue";
 import StaffUserTable from "@/components/StaffUsers/StaffUserTable.vue";
+
 </script>
 
 <template>
