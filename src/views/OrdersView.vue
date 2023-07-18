@@ -5,6 +5,10 @@ import OrderSearch from "@/components/Orders/OrderSearch.vue";
 import OrderTable from "@/components/Orders/OrderTable.vue";
 import OrderDetails from "@/components/Orders/OrderDetails.vue";
 
+async function NewOrder() {
+  await orderStore.Create()
+}
+
 </script>
 
 <template>
@@ -15,7 +19,7 @@ import OrderDetails from "@/components/Orders/OrderDetails.vue";
       <h2>All Orders</h2>
     </div>
       <div>
-        <v-btn color="primary" variant="elevated">New Order</v-btn>
+        <v-btn color="primary" variant="elevated" @click="NewOrder()">New Order</v-btn>
       </div>
     </div>
     <br>

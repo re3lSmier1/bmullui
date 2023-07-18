@@ -8,6 +8,7 @@ import {useProductStore} from "@/stores/ProductStore";
 import LineItem from "@/components/CurrentOrder/LineItem.vue";
 import AddLineItemModal from "@/components/CurrentOrder/AddLineItemModal.vue";
 import SaveOrderModal from "@/components/CurrentOrder/SaveOrderModal.vue";
+import CheckOutModal from "@/components/CurrentOrder/CheckOutModal.vue";
 const productStore = useProductStore()
 const orderStore = useOrderStore()
 const orderId = ref(null)
@@ -19,8 +20,16 @@ async function MoveToCashier(){
 
 onMounted(()=> {
   orderId.value = localStorage.getItem("OrderId")
+  console.log(localStorage.getItem("OrderId"))
+  if(localStorage.getItem("OrderId") === null){
+    orderStore.Create().then(response =>{
+
+      window.location.reload()
+    })
+  }
   productStore.Get()
-  orderStatus ? orderStore.OrderDetails() : console.log()
+  orderStatus ? orderStore.OrderDetails() : console.log("Id is needed")
+
 })
 </script>
 
@@ -61,6 +70,7 @@ onMounted(()=> {
         <v-btn class="mr-3 mb-2" color="black" @click="MoveToCashier()">Checkout</v-btn>
       </div>
     </div>
+    <CheckOutModal />
   </div>
 </template>
 

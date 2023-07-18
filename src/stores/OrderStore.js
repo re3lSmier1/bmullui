@@ -18,6 +18,7 @@ export const useOrderStore = defineStore('orders', {
     orderInfo: ref({}),
     refundStatus: ref(false),
     refundOrderId: ref(null),
+    checkOutModalStatus: ref(false),
   }),
   getters: {
    // doubleCount: (state) => state.counter * 2,
@@ -47,7 +48,8 @@ export const useOrderStore = defineStore('orders', {
       })
     },
     FilterByStatus(data){
-      return this.generic.SendGetRequest(`Filter/OrdersByStatus?Status=${data.Status.value}`).then(response=>{
+      //console.log(data)
+      return this.generic.SendGetRequest(`Filter/OrdersByStatus?Status=${data.Status}`).then(response=>{
         this.orders = response.data
       }).catch(err =>{
         this.utility.CallNotifier(err)
@@ -190,6 +192,7 @@ export const useOrderStore = defineStore('orders', {
           localStorage.removeItem("OrderId")
           this.All()
           this.Create()
+          this.checkOutModalStatus = true
         }).catch(err =>{
         this.utility.CallNotifier(err)
       })

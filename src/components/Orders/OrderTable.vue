@@ -5,6 +5,7 @@ import {onMounted, ref} from "vue";
 import {useOrderStore} from "@/stores/OrderStore";
 import {storeToRefs} from "pinia";
 import OrderDetails from "@/components/Orders/OrderDetails.vue";
+import RefundOrderModal from "@/components/Orders/RefundOrderModal.vue";
 
 const orderStore = useOrderStore()
 const modalStatus = ref(false)
@@ -92,6 +93,7 @@ const desserts = ref([
 
     </v-data-table>
     <OrderDetails :OrderId="orderId" :status="modalStatus" />
+    <RefundOrderModal />
   </div>
 </template>
 

@@ -12,9 +12,13 @@
   const orderStore = useOrderStore()
   const utilityStore = useUtilityStore()
   const productTagStore = useProductTagStore()
+  import instance from "../services/AxiosService";
 
   onMounted(async () => {
-    axios.get(`https://bmull.axium.io?type=Admin`,{ withCredentials:true })
+    console.log(instance.defaults)
+    instance.defaults.baseURL = import.meta.env.VITE_APP_URL
+    //console.log(import.meta.env.VITE_APP_URL)
+    axios.get(`${import.meta.env.VITE_APP_URL}?type=Admin`,{ withCredentials:true })
         .then(async response => {
           console.log(response.data)
 

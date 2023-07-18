@@ -99,52 +99,66 @@ onMounted(async () => {
       <div>
         <h2> {{ currentProduct.name }} </h2>
       </div>
-      <div>
+<!--      <div>
         <v-btn color="primary" variant="elevated">New User</v-btn>
-      </div>
+      </div>-->
     </div>
 
-    <div class="pa-3"><FormText  label="Name" name="Name" type="text" density="compact" /></div>
-    <div class="px-3 "><FormTextArea  label="Description" name="Description" type="text" density="compact" /></div>
-    <div class="pa-3"><FormText  label="Sku" name="Sku" type="text" density="compact" /></div>
-    <!--          <div class="pa-3"><FormText  label="Quantity" name="Quantity" type="number" density="compact" /></div>-->
-    <div class="pa-3"><FormText  label="Price" name="Price" type="number" density="compact" /></div>
-    <div class="d-flex flex-row ml-5">
-      <div class="mr-5">
-        <FormSwitch  label="Is New" name="isNew"/>
-      </div>
-      <div>
-        <FormSwitch  label="Negotiable" name="Negotiable"/>
-      </div>
+    <v-tabs
+        v-model="tab" color="primary"
+    >
+      <v-tab value="one">Details</v-tab>
+      <v-tab value="two">Photos</v-tab>
 
-    </div>
+    </v-tabs>
+    <v-window v-model="tab">
+      <v-window-item value="one">
+        <div class="pa-3"><FormText  label="Name" name="Name" type="text" density="compact" /></div>
+        <div class="px-3 "><FormTextArea  label="Description" name="Description" type="text" density="compact" /></div>
+        <div class="pa-3"><FormText  label="Sku" name="Sku" type="text" density="compact" /></div>
+        <!--          <div class="pa-3"><FormText  label="Quantity" name="Quantity" type="number" density="compact" /></div>-->
+        <div class="pa-3"><FormText  label="Price" name="Price" type="number" density="compact" /></div>
+        <div class="d-flex flex-row ml-5">
+          <div class="mr-5">
+            <FormSwitch  label="Is New" name="isNew"/>
+          </div>
+          <div>
+            <FormSwitch  label="Negotiable" name="Negotiable"/>
+          </div>
 
-    <div class="d-flex flex-row">
-      <div class=" pb-5">
-        <v-btn  theme="blue" variant="elevated" color="blue" @click="submit"
-                :loading="loading"  style="margin-bottom: -15px"
-                :disabled="loading"
+        </div>
 
-        >
-          <v-icon v-if="loading" icon="fa:fas fa-circle-notch fa-spin"></v-icon>
-          Update Product Details</v-btn>
-      </div>
-      <div class="pb-5 px-4" >
-        <v-btn  theme="red" variant="outlined" color="red" @click="DeleteProduct(currentId)">Delete Product </v-btn>
-      </div>
-    </div>
+        <div class="d-flex flex-row">
+          <div class=" pb-5">
+            <v-btn  theme="blue" variant="elevated" color="blue" @click="submit"
+                    :loading="loading"  style="margin-bottom: -15px"
+                    :disabled="loading"
 
-    <v-divider />
-    <v-row>
-      <v-col cols="12">
-        <ManageProductImage :current-id="currentProduct.id"/>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="4" md="4" lg="3"  v-for="pic in currentProduct.productPhotos">
-        <ImgCard :source="pic" />
-      </v-col>
-    </v-row>
+            >
+              <v-icon v-if="loading" icon="fa:fas fa-circle-notch fa-spin"></v-icon>
+              Update Product Details</v-btn>
+          </div>
+          <div class="pb-5 px-4" >
+            <v-btn  theme="red" variant="outlined" color="red" @click="DeleteProduct(currentId)">Delete Product </v-btn>
+          </div>
+        </div>
+      </v-window-item>
+      <v-window-item value="two">
+        <v-row>
+          <v-col cols="12">
+            <ManageProductImage :current-id="currentProduct.id"/>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" sm="4" md="4" lg="3"  v-for="pic in currentProduct.productPhotos">
+            <ImgCard :source="pic" />
+          </v-col>
+        </v-row>
+      </v-window-item>
+
+    </v-window>
+
+
   </div>
 </template>
 

@@ -5,12 +5,19 @@ import {useGenericStore} from "./GenericStore";
 export const useUtilityStore = defineStore('utility', {
   state: () => ({
     generic: useGenericStore(),
+    url: ref(import.meta.env.VITE_APP_URL),
     makes: ref([]),
     categories: ref([]),
     models: ref([]),
     messageNotifierStatus: ref(false),
     notifierMessage: ref(null)
   }),
+  getters: {
+    getUrl: (state) => {
+      console.log(state)
+      return state.url
+    },
+  },
   actions: {
     GetMakes(){
        this.generic.SendGetRequest("Home/Products").then(response =>{

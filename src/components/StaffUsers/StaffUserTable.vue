@@ -3,6 +3,7 @@ import { VDataTable } from 'vuetify/labs/VDataTable'
 import {ref} from "vue";
 import {useUserStore} from "@/stores/UserStore";
 import {onMounted} from "vue";
+import router from "@/router";
 const userStore = useUserStore()
 
 onMounted(() => {
@@ -41,6 +42,9 @@ const desserts = ref([
     iron: '0',
   },
 ])
+function Manage(id){
+  router.push({path: "/manage/staff-user", query: { id: id }})
+}
 </script>
 
 <template>
@@ -53,7 +57,7 @@ const desserts = ref([
         class="elevation-1 pa-5"
     >
       <template v-slot:item.option="{ item }">
-        <v-btn size="small" color="primary">View</v-btn>
+        <v-btn size="small" color="primary" @click="Manage(item.raw.id)">View</v-btn>
       </template>
     </v-data-table>
   </div>

@@ -1,11 +1,13 @@
 import axios from 'axios';
-// const axios = require('axios');
 
+// const axios = require('axios');
 // Step-1: Create a new Axios instance with a custom config.
 // The timeout is set to 10s. If the request takes longer than
 // that then the request will be aborted.
+
 const customAxios = axios.create({
-  baseURL: "https://bmull.axium.io",
+
+  baseURL: "",
   //baseURL: "https://connect.ncu.edu.jm/api",
   withCredentials: true,
   //headers: { 'api-key': 'eyJz-CI6Ikp-4pWY-lhdCI6' }

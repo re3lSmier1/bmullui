@@ -3,8 +3,7 @@
     class="mx-auto" color="#F5F5F5"
   >
     <v-img
-      :src="'https://bmull.axium.io' + source.link"
-
+      :src="url + source.link"
       cover
     ></v-img>
 
@@ -26,6 +25,7 @@
   import {useProductStore} from "@/stores/ProductStore";
   const pStore = useProductStore()
   const show = ref(false)
+  const url = ref(import.meta.env.VITE_APP_URL)
 
   const props = defineProps({
     source: {

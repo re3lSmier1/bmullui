@@ -3,6 +3,7 @@ import {useProductStore} from "@/stores/ProductStore";
 
 const productStore = useProductStore()
 const loading = ref(false)
+const loading1 = ref(false)
 import {ref} from "vue";
 import {useForm} from "vee-validate";
 import BackAppBar from "@/components/BackAppBar.vue";
@@ -11,7 +12,13 @@ function PhotoSync(){
   let fd = new FormData()
   //fd.File = file.value.files[0]
   fd.append("File", file.value.files[0]);
-  useProductStore().BulkUploadPhotos(fd)
+  useProductStore().BulkUploadPhotos(fd).then(response => {
+    loading.value = false;
+    alert("Bulk upload photo was triggered successfully")
+  }).catch(err =>{
+    loading.value = false;
+    alert(err.response.data.message)
+  })
 }
 
 const { setFieldValue, handleSubmit } = useForm({
@@ -28,8 +35,9 @@ function UploadBulk(){
     loading.value = false;
     alert("Bulk upload was triggered successfully")
   }).catch(err =>{
+    console.log(err.response.data.message)
     loading.value = false;
-    alert("Bulk upload was not successful")
+    alert(err.response.data.message)
   })
 }
 </script>
@@ -56,7 +64,7 @@ function UploadBulk(){
       <v-divider />
       <br>
       Please upload a csv file with here to do a bulk upload for photos <br><br>
-      <v-file-input  color="primary" :loading="loading" :disabled="loading"  ref="file"></v-file-input>
+      <v-file-input  color="primary" :loading="loading1" :disabled="loading1"  ref="file"></v-file-input>
       <v-btn @click="PhotoSync()" color="primary">
         <v-icon>mdi-upload</v-icon>Upload Photos
       </v-btn>
