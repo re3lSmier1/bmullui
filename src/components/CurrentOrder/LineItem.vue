@@ -29,7 +29,7 @@ async function DeleteLineItem(id){
                       <v-chip class="mr-2" color="red" label size="small">Delete</v-chip>-->
 <!--            <v-btn class="mr-2" color="amber" size="x-small"><svg-icon type="mdi" size="15" :path="mdiPlus"></svg-icon>Discount</v-btn>
             <v-btn class="mr-2" color="red" size="x-small"><svg-icon size="15" type="mdi" :path="mdiClose"></svg-icon> Discount</v-btn>-->
-            <v-btn class="mr-2" color="black" size="x-small"   @click="DeleteLineItem(product?.id)" >Delete</v-btn>
+            <v-btn class="mr-2" color="black" size="x-small" v-if="!product.isDiscount"  @click="DeleteLineItem(product?.id)" >Delete</v-btn>
           </div>
         </v-list-item-subtitle>
   <v-divider />

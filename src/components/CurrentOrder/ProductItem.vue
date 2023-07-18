@@ -41,6 +41,7 @@ async function GetBySku(sku){
       <v-list-item-title >
         <div class="d-flex justify-space-between">
           <div>
+
             <div>{{ product?.product?.name }} - <span style="font-size: 12px; font-weight: bold">{{ product?.product.sku }}</span></div>
             <div v-if="product?.isDiscount" style="font-size: 12px">
               Discount: <span style="color: blue">{{ product?.discountDisplay }}</span>
@@ -55,9 +56,9 @@ async function GetBySku(sku){
 <!--          <v-chip class="mr-2" color="brown" label size="small">Add Discount</v-chip>
           <v-chip class="mr-2" color="red" label size="small">Remove Discount</v-chip>
           <v-chip class="mr-2" color="red" label size="small">Delete</v-chip>-->
-          <AddItemDiscountModal :OrderItemId="product.id" />
-          <v-btn class="mr-2" color="red" size="x-small" @click="orderStore.RemoveDiscount(product.id)"><svg-icon size="15" type="mdi" :path="mdiClose"></svg-icon> Discount</v-btn>
-          <v-btn class="mr-2" color="black" size="x-small" @click="DeleteOrderItem(product?.id)" >Delete</v-btn>
+          <AddItemDiscountModal :OrderItemId="product.id" v-if="!product.isDiscount" />
+          <v-btn class="mr-2" color="red" size="x-small" v-if="product.isDiscount" @click="orderStore.RemoveDiscount(product.id)"><svg-icon size="15" type="mdi" :path="mdiClose"></svg-icon> Discount</v-btn>
+          <v-btn class="mr-2" color="black" size="x-small"  @click="DeleteOrderItem(product?.id)" >Delete</v-btn>
         </div>
       </v-list-item-subtitle>
   <v-divider />

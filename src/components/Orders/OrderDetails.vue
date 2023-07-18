@@ -103,7 +103,7 @@ function MakeCurrentOrder(id){
   localStorage.setItem("OrderId", id)
   this.orderNumber = id
   orderStore.OrderDetails()
-  router.push("/csa/create-order")
+  router.push("/current-order")
 }
 
 function CompleteOrder(id){

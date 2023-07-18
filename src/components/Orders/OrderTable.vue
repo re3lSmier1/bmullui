@@ -6,6 +6,7 @@ import {useOrderStore} from "@/stores/OrderStore";
 import {storeToRefs} from "pinia";
 import OrderDetails from "@/components/Orders/OrderDetails.vue";
 import RefundOrderModal from "@/components/Orders/RefundOrderModal.vue";
+import router from "@/router";
 
 const orderStore = useOrderStore()
 const modalStatus = ref(false)
@@ -19,6 +20,14 @@ function CallOrderDetails(order_id, status){
   this.modalStatus = status
   orderStore.statusForOrderDetailModal = status
 }
+
+async function MakeCurrentOrder(id) {
+  await localStorage.setItem("OrderId", id)
+  orderStore.orderNumber = id
+  await orderStore.OrderDetails()
+  await router.push("/current-order")
+}
+
 onMounted(() =>{
   orderStore.All()
 })
@@ -31,11 +40,11 @@ const headers = ref([
     sortable: false,
     key: 'orderName',
   },
-  { title: 'Order No.', align: 'end', key: 'orderNumber' },
-  { title: 'Price', align: 'end', key: 'totalPriceDisplay' },
-  { title: 'Status', align: 'end', key: 'statusDisplay' },
-  { title: 'Options', align: 'end', key: 'option' },
-  { title: '', align: 'end', key: 'select' },
+  { title: 'Order No.', align: 'center', key: 'orderNumber' },
+  { title: 'Price', align: 'center', key: 'totalPriceDisplay' },
+  { title: 'Status', align: 'center', key: 'statusDisplay' },
+  { title: 'Options', align: 'center', key: 'option' },
+ /* { title: '', align: 'end', key: 'select' },*/
   //{ title: 'Iron (%)', align: 'end', key: 'iron' },
 ])
 const desserts = ref([
@@ -77,19 +86,20 @@ const desserts = ref([
       <template v-slot:item.option="{item}">
         <div class="text-center">
 <!--          {{ item }}-->
-          <v-btn color="primary" size="small" @click="CallOrderDetails(item.raw.id, true)">
+          <v-btn color="primary" size="small" class="mr-2" @click="CallOrderDetails(item.raw.id, true)">
             View
+          </v-btn>
+          <v-btn color="primary" size="small" variant="text" @click="MakeCurrentOrder(item.raw.id)">
+            Select
           </v-btn>
         </div>
       </template>
-      <template v-slot:item.select="{item}">
+<!--      <template v-slot:item.select="{item}">
         <div class="text-center">
-<!--          {{ item }}-->
-          <v-btn color="primary" size="small" @click="CallOrderDetails(item.raw.id, true)">
-            View
-          </v-btn>
+&lt;!&ndash;          {{ item }}&ndash;&gt;
+
         </div>
-      </template>
+      </template>-->
 
     </v-data-table>
     <OrderDetails :OrderId="orderId" :status="modalStatus" />

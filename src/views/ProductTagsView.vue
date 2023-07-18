@@ -2,6 +2,7 @@
 
 import ProductTagsTable from "@/components/ProductTags/ProductTagsTable.vue";
 import BackAppBar from "@/components/BackAppBar.vue";
+import CreateProductTag from "@/components/ProductTags/CreateProductTag.vue";
 
 </script>
 
@@ -13,6 +14,7 @@ import BackAppBar from "@/components/BackAppBar.vue";
         <h2>Product Tags</h2>
       </div>
       <div>
+        <CreateProductTag />
         <v-btn color="primary" variant="elevated">New Tag</v-btn>
       </div>
     </div>
