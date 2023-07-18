@@ -3,9 +3,7 @@ import BackAppBar from "@/components/BackAppBar.vue";
 
 import OrderSearch from "@/components/Orders/OrderSearch.vue";
 import OrderTable from "@/components/Orders/OrderTable.vue";
-
-
-
+import OrderDetails from "@/components/Orders/OrderDetails.vue";
 
 </script>
 
@@ -24,6 +22,7 @@ import OrderTable from "@/components/Orders/OrderTable.vue";
     <OrderSearch />
     <br>
     <OrderTable />
+
   </div>
 </template>
 

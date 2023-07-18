@@ -3,8 +3,21 @@
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import {onMounted, ref} from "vue";
 import {useOrderStore} from "@/stores/OrderStore";
+import {storeToRefs} from "pinia";
+import OrderDetails from "@/components/Orders/OrderDetails.vue";
 
 const orderStore = useOrderStore()
+const modalStatus = ref(false)
+const orderId = ref(null)
+const { OrderIdForView } = storeToRefs(orderStore)
+
+function CallOrderDetails(order_id, status){
+  //console.log(order_id)
+  this.OrderIdForView = order_id
+  this.orderId = order_id
+  this.modalStatus = status
+  orderStore.statusForOrderDetailModal = status
+}
 onMounted(() =>{
   orderStore.All()
 })
@@ -20,7 +33,8 @@ const headers = ref([
   { title: 'Order No.', align: 'end', key: 'orderNumber' },
   { title: 'Price', align: 'end', key: 'totalPriceDisplay' },
   { title: 'Status', align: 'end', key: 'statusDisplay' },
-  { title: 'Options', align: 'end', key: 'protein' },
+  { title: 'Options', align: 'end', key: 'option' },
+  { title: '', align: 'end', key: 'select' },
   //{ title: 'Iron (%)', align: 'end', key: 'iron' },
 ])
 const desserts = ref([
@@ -53,19 +67,31 @@ const desserts = ref([
         item-value="id"
         class="elevation-1 pa-5"
     >
-      <template v-slot:item.calories="{ item }">
+      <template v-slot:item.totalPriceDisplay="{ item }">
+<!--        {{ item }}-->
         <v-chip color="primary">
-          {{ item.columns.calories }}
+          {{ item.columns.totalPriceDisplay }}
         </v-chip>
       </template>
-      <template v-slot:item.protein="{item}">
+      <template v-slot:item.option="{item}">
         <div class="text-center">
-          <v-btn color="primary" size="small">
+<!--          {{ item }}-->
+          <v-btn color="primary" size="small" @click="CallOrderDetails(item.raw.id, true)">
             View
           </v-btn>
         </div>
       </template>
+      <template v-slot:item.select="{item}">
+        <div class="text-center">
+<!--          {{ item }}-->
+          <v-btn color="primary" size="small" @click="CallOrderDetails(item.raw.id, true)">
+            View
+          </v-btn>
+        </div>
+      </template>
+
     </v-data-table>
+    <OrderDetails :OrderId="orderId" :status="modalStatus" />
   </div>
 </template>
 

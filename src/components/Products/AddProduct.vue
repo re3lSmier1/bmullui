@@ -91,23 +91,25 @@ const submit = handleSubmit(async (values, { resetForm }) => {
     <template v-slot:activator="{ props }">
       <v-btn color="primary" variant="elevated" v-bind="props">New Product</v-btn>
     </template>
-    <v-card>
-      <v-card-title class="text-h5">
-        Add New Product
-      </v-card-title>
+    <v-card color="#F5F5F5">
+
       <v-card-text>
         <div class="pa-5">
+          <div class="text-h5">
+            Add New Product
+          </div>
           <v-row>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="12">
               <div class="pa-3"><FormText  label="Name" name="Name" type="text" density="compact" /></div>
             </v-col>
-            <v-col cols="12" md="6">
-              <div class="pa-3"><FormText  label="Sku" name="Sku" type="text" density="compact" /></div>
-            </v-col>
+
           </v-row>
           <v-row style="margin-top: -45px">
-            <v-col cols="12" md="6">
+<!--            <v-col cols="12" md="6">
               <div class="pa-3"><FormText  label="Quantity" name="Quantity" type="number" density="compact" /></div>
+            </v-col> -->
+            <v-col cols="12" md="6">
+              <div class="pa-3"><FormText  label="Sku" name="Sku" type="text" density="compact" /></div>
             </v-col>
             <v-col cols="12" md="6">
               <div class="pa-3"><FormText  label="Price" name="Price" type="number" density="compact" /></div>
@@ -154,8 +156,6 @@ const submit = handleSubmit(async (values, { resetForm }) => {
 
           <div class="px-3 "><FormTextArea  label="Description" name="Description" type="text" density="compact" /></div>
 
-
-
           <div class="d-flex flex-row ml-5">
             <div class="mr-5">
               <FormSwitch  label="Is New" name="isNew"/>
@@ -166,7 +166,6 @@ const submit = handleSubmit(async (values, { resetForm }) => {
 
           </div>
           <v-col cols="12">
-            <ProductTags />
             <div>
               <v-file-input
                   chips
@@ -180,6 +179,7 @@ const submit = handleSubmit(async (values, { resetForm }) => {
         </div>
       </v-card-text>
       <v-card-actions>
+
         <v-spacer></v-spacer>
         <v-btn
             color="green-darken-1"
@@ -191,7 +191,7 @@ const submit = handleSubmit(async (values, { resetForm }) => {
         <v-btn
             color="green-darken-1"
             variant="elevated"
-            @click="dialog = false"
+            @click="submit"
         >
           Add Product
         </v-btn>

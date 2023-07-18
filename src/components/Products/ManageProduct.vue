@@ -93,11 +93,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="px-5">
     <BackAppBar />
-    <div class="d-flex justify-space-between mt-2">
+    <div class="d-flex justify-space-between mt-2 ">
       <div>
-        <h2> -- Product Name -- </h2>
+        <h2> {{ currentProduct.name }} </h2>
       </div>
       <div>
         <v-btn color="primary" variant="elevated">New User</v-btn>
@@ -134,13 +134,14 @@ onMounted(async () => {
       </div>
     </div>
 
+    <v-divider />
     <v-row>
       <v-col cols="12">
         <ManageProductImage :current-id="currentProduct.id"/>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" lg="3" md="4" v-for="pic in currentProduct.productPhotos">
+      <v-col cols="12" sm="4" md="4" lg="3"  v-for="pic in currentProduct.productPhotos">
         <ImgCard :source="pic" />
       </v-col>
     </v-row>
