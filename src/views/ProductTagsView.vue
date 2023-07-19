@@ -15,7 +15,7 @@ import CreateProductTag from "@/components/ProductTags/CreateProductTag.vue";
       </div>
       <div>
         <CreateProductTag />
-        <v-btn color="primary" variant="elevated">New Tag</v-btn>
+<!--        <v-btn color="primary" variant="elevated">New Tag</v-btn>-->
       </div>
     </div>
     <br>
