@@ -44,7 +44,11 @@ onMounted(()=> {
           <h4>Total: {{ orderStore.newOrder?.priceDisplay  }}</h4>
         </div>
       </div>
+      <div>
+        <b>Status: </b> {{ orderStore.newOrder.statusDisplay }}
+      </div>
       <div >
+        <v-divider />
         <div >
           <v-list>
             <v-list-item v-for="(item, i) in orderStore.newOrder?.orderItems">

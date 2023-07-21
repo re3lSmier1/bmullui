@@ -38,7 +38,8 @@ async function PushToOrder(item) {
 <!--            <div>{{ product.priceDisplay }}</div>-->
           </div>
           <div>
-            <v-btn icon color="success" size="x-small" @click="PushToOrder(product)">
+            <v-btn icon color="success" size="x-small" @click="PushToOrder(product)"
+                   v-if="orderStore.currentOrderStatus === 'Open' ">
               <div style="padding: 5px">
                 <svg-icon size="15" type="mdi" :path="mdiCartPlus"></svg-icon>
               </div>

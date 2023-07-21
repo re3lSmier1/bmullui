@@ -19,6 +19,7 @@ export const useOrderStore = defineStore('orders', {
     refundStatus: ref(false),
     refundOrderId: ref(null),
     checkOutModalStatus: ref(false),
+    currentOrderStatus: ref(null)
   }),
   getters: {
    // doubleCount: (state) => state.counter * 2,
@@ -201,6 +202,7 @@ export const useOrderStore = defineStore('orders', {
       this.generic.SendGetRequest(`Detail/Order?Id=${localStorage.getItem("OrderId")}`)
         .then(response => {
           this.newOrder = response.data
+          this.currentOrderStatus =  response.data.statusDisplay
         }).catch(err =>{
         this.utility.CallNotifier(err)
       })

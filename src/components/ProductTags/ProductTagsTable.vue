@@ -18,6 +18,11 @@ const headers = ref([
   //{ title: 'Iron (%)', align: 'end', key: 'iron' },
 ])
 const productTagStore = useProductTagStore()
+function Manage(id){
+  productTagStore.Delete(id)/*.then((response) => {
+
+  })*/
+}
 </script>
 
 <template>
@@ -29,7 +34,7 @@ const productTagStore = useProductTagStore()
       class="elevation-1 pa-5"
   >
     <template v-slot:item.option="{ item }">
-      <v-btn size="small" color="red">Delete</v-btn>
+      <v-btn size="small" color="red" @click="Manage(item.raw.id)">Delete</v-btn>
     </template>
   </v-data-table>
 <!--  <div class="" v-for="item in productTagStore.productTags">

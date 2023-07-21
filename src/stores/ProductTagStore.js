@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia';
 import {useGenericStore} from "./GenericStore";
 import {ref} from "vue";
+import {useUtilityStore} from "@/stores/UtilityStore";
 
 
 export const useProductTagStore = defineStore('product-tag', {
   state: () => ({
     counter: 0,
+    utility: useUtilityStore(),
     generic: useGenericStore(),
     productTags: ref([]),
     currentTags: ref([]),
@@ -32,13 +34,17 @@ export const useProductTagStore = defineStore('product-tag', {
       return this.generic.SendPostRequest("ProductTag/Create", values)
         .then((response) => {
           this.Get()
+          this.utility.CallNotifier("Product Tag successfully created")
         })
     },
     Delete(id) {
       return this.generic.SendPostRequest("ProductTag/Delete", { Id: id })
         .then((response) => {
           this.Get()
-        })
+          this.utility.CallNotifier("Product Tag successfully deleted")
+        }).catch(err =>{
+          this.utility.CallNotifier(err)
+          })
     },
     Update() {
 
