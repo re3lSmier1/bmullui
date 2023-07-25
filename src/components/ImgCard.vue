@@ -12,7 +12,7 @@
     <v-card-actions >
       <v-spacer></v-spacer>
 
-      <v-btn size="small" color="surface-variant" variant="text" >View</v-btn>
+      <v-btn size="small" color="surface-variant" variant="text" @click="SetAsMainPhoto(source.id)">Set As Main Photo</v-btn>
 
       <v-btn size="small" color="red" variant="text" @click="DeletePhoto(source.id)">Delete</v-btn>
 
@@ -34,6 +34,9 @@
   })
   function DeletePhoto(id){
     pStore.DeletePhotos(id)
+  }
+  function SetAsMainPhoto(id){
+    pStore.SetAsMainPhoto(id)
   }
 </script>
 

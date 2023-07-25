@@ -88,8 +88,8 @@ export const useProductStore = defineStore('products', {
     MarkGroupUnavailable(){
 
     },
-    SetMainPhoto(){
-
+    SetAsMainPhoto(){
+      return this.generic.SendPostRequest("/Product/SetMainPhoto")
     },
     Update(values){
       return this.generic.SendPostRequest("/Product/Update", values)

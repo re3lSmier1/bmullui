@@ -63,7 +63,7 @@ function UploadBulk(){
       <br><br>
       <v-divider />
       <br>
-      Please upload a csv file with here to do a bulk upload for photos <br><br>
+      Please upload a csv file here to do a bulk upload for photos <br><br>
       <v-file-input  color="primary" :loading="loading1" :disabled="loading1"  ref="file"></v-file-input>
       <v-btn @click="PhotoSync()" color="primary">
         <v-icon>mdi-upload</v-icon>Upload Photos
