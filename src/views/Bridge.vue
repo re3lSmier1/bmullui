@@ -5,7 +5,7 @@ import BridgeButton from "@/components/BridgeButton.vue";
 
 <template>
   <v-app-bar :elevation="2" color="primary"  density="compact"></v-app-bar>
-  <v-container style="margin-top: 10vh">
+  <v-container style="margin-top: 2vh">
     <div class="text-center">
       <img src="../assets/bmull_logo_1.png" style="max-height: 270px; max-width: 270px; height: auto; width: auto" alt="">
     </div>

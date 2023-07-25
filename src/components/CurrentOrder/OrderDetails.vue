@@ -71,7 +71,7 @@ onMounted(()=> {
         <v-btn class="mr-3 mb-2" color="amber"   @click="orderStore.ClearOrder()">Clear</v-btn>
         <SaveOrderModal :OrderId="orderStore.newOrder?.orderNumber" />
         <v-btn class="mr-3 mb-2" color="red"  @click="orderStore.DeleteOrder()">Discard</v-btn>
-        <v-btn class="mr-3 mb-2" color="black" @click="MoveToCashier()">Checkout</v-btn>
+        <v-btn class="mr-3 mb-2" color="black" @click="MoveToCashier()" v-if="orderStore.newOrder?.status === 9">Checkout</v-btn>
       </div>
     </div>
     <CheckOutModal />

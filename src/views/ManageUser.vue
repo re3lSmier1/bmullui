@@ -119,7 +119,7 @@ const submit = handleSubmit(async (values, { resetForm }) => {
     loading = false
     //resetForm()
     alert("User was successfully updated ");
-    router.push("/users")
+    router.push("/staff-users")
 
   }).catch(error => {
     loading = false

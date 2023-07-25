@@ -2,6 +2,7 @@
 
 import BackAppBar from "@/components/BackAppBar.vue";
 import StaffUserTable from "@/components/StaffUsers/StaffUserTable.vue";
+import CreateUser from "@/components/StaffUsers/CreateUser.vue";
 
 </script>
 
@@ -13,7 +14,8 @@ import StaffUserTable from "@/components/StaffUsers/StaffUserTable.vue";
         <h2>Staff User</h2>
       </div>
       <div>
-        <v-btn color="primary" variant="elevated">New User</v-btn>
+<!--        <v-btn color="primary" variant="elevated">New User</v-btn>-->
+        <CreateUser />
       </div>
     </div>
     <br>
