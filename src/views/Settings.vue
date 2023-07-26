@@ -70,6 +70,7 @@ function UploadBulk(){
       </v-btn>
     </div>
     <v-divider />
+    Percentage Limit
   </div>
 </template>
 
