@@ -17,6 +17,7 @@ import BridgeButton from "@/components/BridgeButton.vue";
       <v-col cols="12" sm="4" ><BridgeButton url="/staff-users" icon="mdi-account" name="Staff Users" /></v-col>
       <v-col cols="12" sm="4" ><BridgeButton url="/settings" icon="mdi-cog" name="Settings" /></v-col>
       <v-col cols="12" sm="4" ><BridgeButton url="/product-tags" icon="mdi-tag" name="Product Tags" /></v-col>
+      <v-col cols="12" sm="4" ><BridgeButton url="/" icon="mdi-tag" name="Approval List" /></v-col>
     </v-row>
   </v-container>
 </template>
