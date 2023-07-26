@@ -7,6 +7,7 @@ const loading1 = ref(false)
 import {ref} from "vue";
 import {useForm} from "vee-validate";
 import BackAppBar from "@/components/BackAppBar.vue";
+import PercentageLimit from "@/components/Settings/PercentageLimit.vue";
 function PhotoSync(){
   console.log(file.value.files[0])
   let fd = new FormData()
@@ -70,7 +71,9 @@ function UploadBulk(){
       </v-btn>
     </div>
     <v-divider />
-    Percentage Limit
+    <div class="pa-5">
+      <PercentageLimit />
+    </div>
   </div>
 </template>
 

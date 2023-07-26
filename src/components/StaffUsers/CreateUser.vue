@@ -66,8 +66,15 @@
              <FormText   label="PhoneNumberOne" name="PhoneNumberOne"/>
            </v-col>
          </v-row>
+         <v-row>
+           <v-col cols="12" md="6">
+             <FormText   label="TaxRegistrationNumber" name="TaxRegistrationNumber"/>
+           </v-col>
+           <v-col cols="12" md="6">
+             <FormText   label="User Pin" name="Pin"/>
+           </v-col>
+         </v-row>
 
-         <FormText   label="TaxRegistrationNumber" name="TaxRegistrationNumber"/>
 
          <div class="pb-5">
            <v-btn block theme="blue" variant="elevated" color="blue" @click="submit"

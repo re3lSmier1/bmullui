@@ -6,6 +6,7 @@ import {useForm} from "vee-validate";
 import {useOrderStore} from "@/stores/OrderStore";
 import {mdiPlus} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import FormSelect from "@/components/form/FormSelect.vue";
 const loading = ref(false)
 const  dialog = ref(false)
 const orderStore = useOrderStore()
@@ -68,6 +69,9 @@ onMounted(() => {
       <v-divider></v-divider>
       <v-card-text >
         <FormText   label="Discount Amount" name="Discount" type="number" />
+        <FormSelect :items="['Percentage', 'Amount']" name="discountType" label="Discount Type" />
+        <FormText   label="Username" name="username" type="text" />
+        <FormText   label="Password" name="Password" type="password" />
         <div class="pb-5">
           <v-btn block theme="blue" variant="elevated" color="blue" @click="submit"
                  :loading="loading"
