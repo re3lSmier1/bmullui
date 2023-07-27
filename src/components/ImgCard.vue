@@ -23,9 +23,13 @@
 <script setup>
   import { ref } from "vue";
   import {useProductStore} from "@/stores/ProductStore";
+  import {useOrderStore} from "@/stores/OrderStore";
+  import {useRoute} from "vue-router";
   const pStore = useProductStore()
+  const orderStore = useOrderStore()
   const show = ref(false)
   const url = ref(import.meta.env.VITE_APP_URL)
+  const route = useRoute()
 
   const props = defineProps({
     source: {
@@ -36,7 +40,7 @@
     pStore.DeletePhotos(id)
   }
   function SetAsMainPhoto(id){
-    pStore.SetAsMainPhoto(id)
+    pStore.SetAsMainPhoto(id, route.query.id)
   }
 </script>
 

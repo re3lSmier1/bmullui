@@ -62,20 +62,14 @@ export const useProductStore = defineStore('products', {
       ///Product/DeletePhotos
       return this.generic.SendPostRequest("/Product/BulkUploadProducts")
     },
-    BulkUploadPhotos(){
+      BulkUploadPhotos(fd){
       ///Product/DeletePhotos
-      return this.generic.SendPostRequest("/Product/BulkUploadProductPhotos")
+      return this.generic.SendPostRequest("/Product/BulkUploadProductPhotos", fd)
     },
 
-    GroupAddProduct(){
-
-    },
-    GroupDeleteProduct(){
-
-    },
-    ManageTags(){
-
-    },
+    GroupAddProduct(){},
+    GroupDeleteProduct(){},
+    ManageTags(){},
     MarkAvailable(){
 
     },
@@ -88,8 +82,8 @@ export const useProductStore = defineStore('products', {
     MarkGroupUnavailable(){
 
     },
-    SetAsMainPhoto(){
-      return this.generic.SendPostRequest("/Product/SetMainPhoto")
+    SetAsMainPhoto(photoId, id){
+      return this.generic.SendPostRequest("/Product/SetMainPhoto", { Id: id, PhotoId: photoId})
     },
     Update(values){
       return this.generic.SendPostRequest("/Product/Update", values)
