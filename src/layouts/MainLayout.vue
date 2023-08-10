@@ -1,5 +1,5 @@
 <script setup>
-  import {onMounted} from "vue";
+import {onMounted, watch} from "vue";
   import axios from "axios";
   import {useUserStore} from "@/stores/UserStore";
   import {useProductStore} from "@/stores/ProductStore";
@@ -13,6 +13,8 @@
   const utilityStore = useUtilityStore()
   const productTagStore = useProductTagStore()
   import instance from "../services/AxiosService";
+import {storeToRefs} from "pinia";
+  const { user } = storeToRefs(userStore)
 
   onMounted(async () => {
     console.log(instance.defaults)
@@ -27,14 +29,17 @@
             userStore.validate_url = response.data.validate_url
             userStore.register_url = response.data.register_url
 
-            await userStore.GetUserRoles()
-            await productStore.Get()
+
+
             await orderStore.Get()
             await orderStore.GetOrderStatus()
             await utilityStore.GetMakes()
 
             setTimeout(function (){
+              productStore.Get()
               productTagStore.Get()
+              utilityStore.GetAccessLevels()
+              userStore.GetUserRoles()
             }, 1000)
 
           } else {
@@ -43,6 +48,12 @@
 
         })
   })
+
+  watch(user, (n, o) => {
+    //console.log(n.id)
+    //userStore.GetUserRolesById(n?.id)
+  })
+
 </script>
 
 <template>

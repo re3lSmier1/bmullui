@@ -29,6 +29,9 @@
         <FormText   label="Phone Number" name="PhoneNumberOne"/>
       </v-col>
     </v-row>
+    <div class="pa-5">
+      <RolesPicker />
+    </div>
 
 <!--    <v-row class="pa-5 bg-grey-lighten-3" >
       <v-col cols="12" md="3" lg="2" v-for="item in currentUser?.roles" >
@@ -70,6 +73,7 @@ const currentId = route.query.id
 const { currentUser } = storeToRefs(userStore)
 import { schema } from "@/schemas/ManageUserSchema"
 import BackAppBar from "@/components/BackAppBar.vue";
+import RolesPicker from "@/components/StaffUsers/RolesPicker.vue";
 
  let loading = ref(false)
 

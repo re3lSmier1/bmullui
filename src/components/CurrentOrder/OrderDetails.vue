@@ -66,7 +66,7 @@ onMounted(()=> {
       </div>
     </div>
     <div class="mt-3">
-      <div class="d-flex flex-wrap">
+      <div class="d-flex flex-wrap" v-if="orderStore.newOrder?.status === 9">
         <AddLineItemModal />
         <v-btn class="mr-3 mb-2" color="amber"   @click="orderStore.ClearOrder()">Clear</v-btn>
         <SaveOrderModal :OrderId="orderStore.newOrder?.orderNumber" />

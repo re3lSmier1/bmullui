@@ -5,6 +5,8 @@ import {ref, watch} from "vue";
 import {useOrderStore} from "@/stores/OrderStore";
 import {storeToRefs} from "pinia";
 import AddItemDiscountModal from "@/components/CurrentOrder/AddItemDiscountModal.vue";
+import RemoveDiscountModal from "@/components/CurrentOrder/RemoveDiscountModal.vue";
+import SetItemPrice from "@/components/CurrentOrder/SetItemPrice.vue";
 const orderStore = useOrderStore()
 const { orderStatus, orderNumber } = storeToRefs(useOrderStore())
 const props = defineProps({
@@ -56,8 +58,9 @@ async function GetBySku(sku){
 <!--          <v-chip class="mr-2" color="brown" label size="small">Add Discount</v-chip>
           <v-chip class="mr-2" color="red" label size="small">Remove Discount</v-chip>
           <v-chip class="mr-2" color="red" label size="small">Delete</v-chip>-->
+          <SetItemPrice :OrderItemId="product.id" />
           <AddItemDiscountModal :OrderItemId="product.id" v-if="!product.isDiscount" />
-          <v-btn class="mr-2" color="red" size="x-small" v-if="product.isDiscount" @click="orderStore.RemoveDiscount(product.id)"><svg-icon size="15" type="mdi" :path="mdiClose"></svg-icon> Discount</v-btn>
+          <RemoveDiscountModal :OrderItemId="product.id"  v-if="product.isDiscount"/>
           <v-btn class="mr-2" color="black" size="x-small"  @click="DeleteOrderItem(product?.id)" >Delete</v-btn>
         </div>
       </v-list-item-subtitle>

@@ -135,7 +135,25 @@ export const useUserStore = defineStore('users', {
 
 
     },
-
+    GeneratePin(){
+      this.generic.SendPostRequest('User/GeneratePin', {})
+    },
+    ResetPin(){
+      this.generic.SendPostRequest("User/ResetPinlock", { UserId: this.user?.id})
+      .then(response => {
+        this.utility.CallNotifier("Pin reset was successful");
+      })
+      .catch(err => {
+        this.utility.CallNotifier(err)
+      })
+    },
+    RoleChecker(role){
+      return this.roles.includes(role)
+    },
+    RoleReturner(id){
+      //console.log(id)
+      return this.roles.includes(id)
+    }
 
   },
 });

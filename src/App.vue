@@ -1,6 +1,6 @@
 <script setup>
 import {computed} from "vue";
-import {RouterLink, RouterView, useRoute} from 'vue-router'
+import {RouterView, useRoute} from 'vue-router'
 const default_layout = "default";
 const route = useRoute();
 import HelloWorld from './components/HelloWorld.vue'

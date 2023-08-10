@@ -9,7 +9,7 @@ import CreateUser from "@/components/StaffUsers/CreateUser.vue";
 <template>
   <BackAppBar />
   <div class="pa-5">
-    <div class="d-flex justify-space-between mt-2">
+    <div class="d-flex justify-space-between mt-2 pr-5">
       <div>
         <h2>Staff User</h2>
       </div>

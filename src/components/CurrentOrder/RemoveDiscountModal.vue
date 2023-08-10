@@ -1,10 +1,11 @@
 <script setup>
+
+import {mdiClose, mdiPlus} from "@mdi/js";
 import {onMounted, ref} from "vue";
 import FormText from "@/components/form/FormText.vue";
 import {useForm} from "vee-validate";
 
 import {useOrderStore} from "@/stores/OrderStore";
-import {mdiPlus} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 import FormSelect from "@/components/form/FormSelect.vue";
 import FormCheckbox from "@/components/form/FormCheckbox.vue";
@@ -30,8 +31,10 @@ const { setFieldValue, handleSubmit } = useForm({
   }
 });
 const submit = handleSubmit(async (values) => {
+
   values["OrderItemId"] = props.OrderItemId
-  await orderStore.AddDiscount(values)
+  console.log(values)
+  await orderStore.RemoveDiscount(values)
       .then(response => {
         //console.log(response.data)
         orderStore.OrderDetails()
@@ -53,28 +56,14 @@ onMounted(() => {
       max-width="450px"
   >
     <template v-slot:activator="{ props }">
-      <!--        <v-btn icon size="small" density="comfortable" flat class="mr-1" variant="tonal" v-bind="props">
-                <v-icon icon="mdi-sale" color="black"></v-icon>
-              </v-btn>-->
-      <v-btn class="mr-2" color="amber" size="x-small"  v-bind="props"><svg-icon type="mdi" size="15" :path="mdiPlus"></svg-icon>Discount</v-btn>
-<!--      <v-btn icon size="small" density="comfortable" flat class="mr-1" variant="tonal" >
-        <v-icon icon="mdi-sale" color="black"></v-icon>
-      </v-btn>-->
-      <!--        <v-tooltip text="Discount Item" location="top">
-                <template v-slot:activator="{ props }">
-                </template>
-              </v-tooltip>-->
+      <v-btn class="mr-2" color="red" size="x-small"   v-bind="props"><svg-icon size="15" type="mdi" :path="mdiClose"></svg-icon> Discount</v-btn>
+
     </template>
     <v-card>
-      <v-card-title>Add Discount Amount</v-card-title>
+      <v-card-title>Remove Discount </v-card-title>
       <v-divider></v-divider>
       <v-card-text >
-        <FormText   label="Discount Amount" name="Discount" type="number" />
-        <FormSelect :items="[
-            { 'text': 'Amount', 'value': false},
-            { 'text': 'Percentage', 'value': true},
-            ]" name="IsDiscountPercentage" label="Discount Type" />
-<!--        <FormCheckbox label="IsDiscountPercentage" name="Percentage" />-->
+
         <FormText   label="Pin" name="Pin" type="password" />
         <div class="pb-5">
           <v-btn block theme="blue" variant="elevated" color="blue" @click="submit"
@@ -86,23 +75,6 @@ onMounted(() => {
             Confirm</v-btn>
         </div>
       </v-card-text>
-      <v-divider></v-divider>
-      <!--        <v-card-actions>
-                <v-btn
-                  color="blue-darken-1"
-                  variant="text"
-                  @click="dialog = false"
-                >
-                  Close
-                </v-btn>
-                <v-btn
-                  color="blue-darken-1"
-                  variant="text"
-                  @click="dialog = false"
-                >
-                  Save
-                </v-btn>
-              </v-card-actions>-->
     </v-card>
   </v-dialog>
 </template>

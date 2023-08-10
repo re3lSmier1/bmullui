@@ -4,6 +4,8 @@ import {ref} from "vue";
 import {useUserStore} from "@/stores/UserStore";
 import {onMounted} from "vue";
 import router from "@/router";
+import UpdateUserRole from "@/components/StaffUsers/UpdateUserLevel.vue";
+import RolesPicker from "@/components/StaffUsers/RolesPicker.vue";
 const userStore = useUserStore()
 
 onMounted(() => {
@@ -24,24 +26,7 @@ const headers = ref([
   { title: 'Options', align: 'end', key: 'option' },
   //{ title: 'Iron (%)', align: 'end', key: 'iron' },
 ])
-const desserts = ref([
-  {
-    name: 'Frozen Yogurt',
-    calories: 159,
-    fat: 6.0,
-    carbs: 24,
-    protein: 4.0,
-    iron: '1',
-  },
-  {
-    name: 'Jelly bean',
-    calories: 375,
-    fat: 0.0,
-    carbs: 94,
-    protein: 0.0,
-    iron: '0',
-  },
-])
+
 function Manage(id){
   router.push({path: "/manage/staff-user", query: { id: id }})
 }
@@ -49,6 +34,27 @@ function Manage(id){
 
 <template>
   <div>
+    <v-expansion-panels class="mb-3" v-for="item in userStore.users" :key="item">
+      <v-expansion-panel
+      >
+        <v-expansion-panel-title expand-icon="mdi-menu-down">
+          <b>{{ item.name }}</b> | {{ item.emailAddress }} | {{ item.phoneNumber }}
+          <br>
+
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <div class="">
+            <div>Address: {{ item.address }}</div>
+            <div>TRN: {{ item.trn }}</div>
+<!--            <div>TRN: {{ item.userType }}</div>--> <br>
+
+              <UpdateUserRole />
+<!--              <RolesPicker />-->
+            <v-btn color="primary" class="mr-5" @click="GeneratePin()">Generate Pin</v-btn>
+          </div>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
     <v-data-table
         v-model:items-per-page="itemsPerPage"
         :headers="headers"

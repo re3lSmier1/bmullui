@@ -149,14 +149,14 @@ export const useOrderStore = defineStore('orders', {
 
     },
     AddDiscount(values){
+      values["IsDiscountPercentage"] = values["IsDiscountPercentage"].value
       return this.generic.SendPostRequest("Order/AddDiscount", values).catch(err =>{
         this.utility.CallNotifier(err)
       })
     },
-    RemoveDiscount(id){
-      this.generic.SendPostRequest("Order/RemoveDiscount", { OrderItemId: id }).then(response => {
-        this.OrderDetails()
-      }).catch(err =>{
+    RemoveDiscount(values){
+      return this.generic.SendPostRequest("Order/RemoveDiscount", { OrderItemId: values['OrderItemId'], Pin: values["Pin"] })
+          .catch(err =>{
         this.utility.CallNotifier(err)
       })
     },
@@ -235,6 +235,9 @@ export const useOrderStore = defineStore('orders', {
       return this.generic.SendPostRequest("Order/Refund", { OrderId: this.refundOrderId, Note: data.note }).catch(err =>{
         this.utility.CallNotifier(err)
       })
+    },
+    SetItemPrice(values){
+      return this.generic.SendPostRequest("Order/SetPrice", values)
     }
 
   },

@@ -10,7 +10,8 @@ export const useUtilityStore = defineStore('utility', {
     categories: ref([]),
     models: ref([]),
     messageNotifierStatus: ref(false),
-    notifierMessage: ref(null)
+    notifierMessage: ref(null),
+    accessLevels: ref(null)
   }),
   getters: {
     getUrl: (state) => {
@@ -34,6 +35,13 @@ export const useUtilityStore = defineStore('utility', {
     CallNotifier(message){
       this.messageNotifierStatus = true;
       this.notifierMessage = message
+    },
+    GetAccessLevels(){
+      this.generic.SendGetRequest("List/AccessControl", {})
+          .then(response =>{
+            console.log(response)
+            this.accessLevels = response.data
+          })
     }
 
   }
