@@ -14,7 +14,8 @@ const orderStore = useOrderStore()
 const orderId = ref(null)
 const { orderStatus, orderNumber } = storeToRefs(useOrderStore())
 
-onMounted(()=> {
+onMounted(() => {
+
   orderId.value = localStorage.getItem("OrderId")
   productStore.Get()
   orderStatus ? orderStore.OrderDetails() : console.log()
