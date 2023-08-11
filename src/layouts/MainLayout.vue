@@ -29,18 +29,17 @@ import {storeToRefs} from "pinia";
             userStore.validate_url = response.data.validate_url
             userStore.register_url = response.data.register_url
 
-
-
+            userStore.GetUserRoles()
             await orderStore.Get()
             await orderStore.GetOrderStatus()
             await utilityStore.GetMakes()
 
-            setTimeout(function (){
+            //setTimeout(function (){
               productStore.Get()
               productTagStore.Get()
               utilityStore.GetAccessLevels()
-              userStore.GetUserRoles()
-            }, 1000)
+
+            //}, 1000)
 
           } else {
             window.location.href = response.data.validate_url

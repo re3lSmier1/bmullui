@@ -20,11 +20,13 @@ async function MoveToCashier(){
 
 onMounted(()=> {
   orderId.value = localStorage.getItem("OrderId")
-  console.log(localStorage.getItem("OrderId"))
+  //console.log(localStorage.getItem("OrderId"))
   if(localStorage.getItem("OrderId") === null){
     orderStore.Create().then(response =>{
 
       window.location.reload()
+    }).catch(err =>{
+      console.log(err)
     })
   }
   productStore.Get()
