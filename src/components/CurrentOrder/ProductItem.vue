@@ -58,9 +58,9 @@ async function GetBySku(sku){
 <!--          <v-chip class="mr-2" color="brown" label size="small">Add Discount</v-chip>
           <v-chip class="mr-2" color="red" label size="small">Remove Discount</v-chip>
           <v-chip class="mr-2" color="red" label size="small">Delete</v-chip>-->
-          <SetItemPrice :OrderItemId="product.id" />
-          <AddItemDiscountModal :OrderItemId="product.id" v-if="!product.isDiscount" />
-          <RemoveDiscountModal :OrderItemId="product.id"  v-if="product.isDiscount"/>
+          <SetItemPrice :OrderItemId="product.id"  v-if="orderStore.newOrder.status === 9"/>
+          <AddItemDiscountModal :OrderItemId="product.id" v-if="!product.isDiscount && orderStore.newOrder.status === 9" />
+          <RemoveDiscountModal :OrderItemId="product.id"  v-if="product.isDiscount && orderStore.newOrder.status === 9"/>
           <v-btn class="mr-2" color="black" size="x-small"  @click="DeleteOrderItem(product?.id)" >Delete</v-btn>
         </div>
       </v-list-item-subtitle>

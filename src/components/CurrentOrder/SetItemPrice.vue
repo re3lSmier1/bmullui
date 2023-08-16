@@ -7,7 +7,9 @@ const  dialog = ref(false)
 import FormText from "@/components/form/FormText.vue";
 import {useForm} from "vee-validate";
 import {useOrderStore} from "@/stores/OrderStore";
+import {useUtilityStore} from "@/stores/UtilityStore";
 const orderStore = useOrderStore()
+const utilityStore = useUtilityStore()
 
 const props = defineProps({
   OrderItemId: {
@@ -33,8 +35,12 @@ const submit = handleSubmit(async (values) => {
   await orderStore.SetItemPrice(values)
       .then(response => {
         //console.log(response.data)
+        utilityStore.CallNotifier("Price was successfully updated")
         orderStore.OrderDetails()
         dialog.value = false
+      })
+      .catch(err => {
+        utilityStore.CallNotifier(err.message)
       })
 });
 

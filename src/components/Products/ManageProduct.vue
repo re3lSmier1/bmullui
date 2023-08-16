@@ -15,6 +15,7 @@ import {useRouter} from "vue-router/dist/vue-router";
 import ImgCard from "@/components/ImgCard.vue";
 import ManageProductTags from "@/components/ManageProductTags.vue";
 import ManageProductImage from "@/components/ManageProductImage.vue";
+import ProductSettings from "@/components/Products/ProductSettings.vue";
 const productStore = useProductStore()
 const { currentProduct } = storeToRefs(productStore)
 const route = useRoute()
@@ -97,7 +98,7 @@ onMounted(async () => {
     <BackAppBar />
     <div class="d-flex justify-space-between mt-2 ">
       <div>
-        <h2> {{ currentProduct.name }} </h2>
+        <h2> Manage Product </h2>
       </div>
 <!--      <div>
         <v-btn color="primary" variant="elevated">New User</v-btn>
@@ -109,6 +110,7 @@ onMounted(async () => {
     >
       <v-tab value="one">Details</v-tab>
       <v-tab value="two">Photos</v-tab>
+      <v-tab value="three">Settings</v-tab>
 
     </v-tabs>
     <v-window v-model="tab">
@@ -154,6 +156,9 @@ onMounted(async () => {
             <ImgCard :source="pic" />
           </v-col>
         </v-row>
+      </v-window-item>
+      <v-window-item value="three" >
+        <ProductSettings />
       </v-window-item>
 
     </v-window>

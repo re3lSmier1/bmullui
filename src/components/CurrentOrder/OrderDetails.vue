@@ -9,6 +9,7 @@ import LineItem from "@/components/CurrentOrder/LineItem.vue";
 import AddLineItemModal from "@/components/CurrentOrder/AddLineItemModal.vue";
 import SaveOrderModal from "@/components/CurrentOrder/SaveOrderModal.vue";
 import CheckOutModal from "@/components/CurrentOrder/CheckOutModal.vue";
+import RefundOrderModal from "@/components/Orders/RefundOrderModal.vue";
 const productStore = useProductStore()
 const orderStore = useOrderStore()
 const orderId = ref(null)
@@ -33,6 +34,11 @@ onMounted(()=> {
   orderStatus ? orderStore.OrderDetails() : console.log("Id is needed")
 
 })
+function RefundOrder(id, status){
+  orderStore.refundStatus = status
+  orderStore.refundOrderId = id
+}
+
 </script>
 
 <template>
@@ -75,8 +81,16 @@ onMounted(()=> {
         <v-btn class="mr-3 mb-2" color="red"  @click="orderStore.DeleteOrder()">Discard</v-btn>
         <v-btn class="mr-3 mb-2" color="black" @click="MoveToCashier()" v-if="orderStore.newOrder?.status === 9">Checkout</v-btn>
       </div>
+      <div class="d-flex flex-wrap"  v-if="orderStore.newOrder?.status === 7">
+        <v-btn class="mr-3 mb-2" color="primary" @click="orderStore.CompleteOrder(orderNumber)">Complete</v-btn>
+        <v-btn class="mr-3 mb-2" color="black" @click="orderStore.CancelOrder(orderNumber)">Cancel</v-btn>
+      </div>
+      <div class="d-flex flex-wrap" v-if="orderStore.newOrder?.status === 1" >
+        <v-btn class="mr-3 mb-2" color="green" @click="RefundOrder(orderNumber, true)">Refund</v-btn>
+      </div>
     </div>
     <CheckOutModal />
+    <RefundOrderModal />
   </div>
 </template>
 

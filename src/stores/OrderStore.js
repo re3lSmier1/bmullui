@@ -165,6 +165,8 @@ export const useOrderStore = defineStore('orders', {
          .then(response => {
            this.orderStatus = false
            this.Get()
+           localStorage.removeItem("OrderId")
+           window.location.reload()
          }).catch(err =>{
          this.utility.CallNotifier(err)
        })
@@ -221,20 +223,36 @@ export const useOrderStore = defineStore('orders', {
       //this.OrderToViewStatus = false
     },
     CompleteOrder(id){
-      return this.generic.SendPostRequest("Order/Complete", { OrderId: id }).catch(err =>{
+      return this.generic.SendPostRequest("Order/Complete", { OrderId: id })
+          .then(response => {
+            this.utility.CallNotifier("Order has successfully been completed")
+            this.OrderDetails()
+          })
+          .catch(err =>{
         this.utility.CallNotifier(err)
       })
+
     },
     CancelOrder(id){
-      return this.generic.SendPostRequest("Order/Cancel", { OrderId: id }).catch(err =>{
-        this.utility.CallNotifier(err)
-      })
+      return this.generic.SendPostRequest("Order/Cancel", { OrderId: id })
+          .then(response => {
+            this.utility.CallNotifier("Order has been cancelled")
+            this.OrderDetails()
+          })
+          .catch(err =>{
+            this.utility.CallNotifier(err)
+          })
     },
     RefundOrder(data){
       console.log(data)
-      return this.generic.SendPostRequest("Order/Refund", { OrderId: this.refundOrderId, Note: data.note }).catch(err =>{
-        this.utility.CallNotifier(err)
-      })
+      return this.generic.SendPostRequest("Order/Refund", { OrderId: this.refundOrderId, Note: data.note })
+          .then(response => {
+            this.utility.CallNotifier("Refund was successfully done")
+            this.OrderDetails()
+          })
+          .catch(err =>{
+            this.utility.CallNotifier(err)
+          })
     },
     SetItemPrice(values){
       return this.generic.SendPostRequest("Order/SetPrice", values)

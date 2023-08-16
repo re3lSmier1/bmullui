@@ -70,11 +70,23 @@ export const useProductStore = defineStore('products', {
     GroupAddProduct(){},
     GroupDeleteProduct(){},
     ManageTags(){},
-    MarkAvailable(){
-
+    MarkAvailable(id){
+      this.generic.SendPostRequest("Product/MarkAvailable", {Id: id})
+          .then(response =>{
+            this.utility.CallNotifier("The product has been made available")
+          })
+          .catch(err => {
+            this.utility.CallNotifier(err.message)
+          })
     },
-    MarkUnavailable(){
-
+    MarkUnavailable(id){
+      this.generic.SendPostRequest("Product/MarkUnavailable", {Id: id})
+          .then(response =>{
+            this.utility.CallNotifier("The product has been made unavailable")
+          })
+          .catch(err => {
+            this.utility.CallNotifier(err.message)
+          })
     },
     MarkGroupAvailable(){
 
@@ -83,7 +95,13 @@ export const useProductStore = defineStore('products', {
 
     },
     SetAsMainPhoto(photoId, id){
-      return this.generic.SendPostRequest("/Product/SetMainPhoto", { Id: id, PhotoId: photoId})
+      return this.generic.SendPostRequest("/Product/SetMainPhoto", { productid: id, PhotoId: photoId})
+          .then(response => {
+            this.utility.CallNotifier("Main photo was successfully updated")
+          })
+          .catch(err =>{
+            this.utility.CallNotifier("Error updating main photo")
+          })
     },
     Update(values){
       return this.generic.SendPostRequest("/Product/Update", values)

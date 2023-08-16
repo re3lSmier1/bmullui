@@ -135,8 +135,13 @@ export const useUserStore = defineStore('users', {
 
 
     },
-    GeneratePin(){
-      this.generic.SendPostRequest('User/GeneratePin', {})
+    GeneratePin(x){
+      this.generic.SendPostRequest('User/GeneratePin', {UserId: x})
+          .then(response => {
+            this.utility.CallNotifier("New pin was generated");
+          }).catch(err => {
+            this.utility.CallNotifier(err)
+      })
     },
     ResetPin(){
       this.generic.SendPostRequest("User/ResetPinlock", { UserId: this.user?.id})

@@ -132,15 +132,6 @@ watch(statusForOrderDetailModal, (n, o) =>{
   }
 })
 
-
-  onMounted(async () =>{
-    //this.dialog = status
-    /*await orderStore.OrderDetailsById(props.OrderId)
-      .then(res => {
-        console.log(res.data)
-        //this.orderInfo.value = res.data
-      });*/
-  })
 </script>
 
 <style scoped>

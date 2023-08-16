@@ -12,6 +12,10 @@ onMounted(() => {
   userStore.Get();
 })
 
+function GeneratePin(x) {
+  userStore.GeneratePin(x)
+}
+
 
 const itemsPerPage = ref(25)
 const headers = ref([
@@ -50,7 +54,7 @@ function Manage(id){
 
               <UpdateUserRole />
 <!--              <RolesPicker />-->
-            <v-btn color="primary" class="mr-5" @click="GeneratePin()">Generate Pin</v-btn>
+            <v-btn color="primary" class="mr-5" @click="GeneratePin(item.id)">Generate Pin</v-btn>
           </div>
         </v-expansion-panel-text>
       </v-expansion-panel>
